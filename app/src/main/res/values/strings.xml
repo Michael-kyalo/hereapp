@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">hAppa</string>
+    <string name="action_settings">account</string>
+    <string name="action_favorite">favorite</string>
+    <string name="action_map">Map</string>
+    <string name="action_notifications">notification</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_home">home</string>
+    <string name="DEFAULT_CLIENT_ID">667841043465-4v9aqatk50sjnokve4v5vbjh4daui24e.apps.googleusercontent.com</string>
+    <string name="signin">Signing in.....</string>
+    <string name="signinfailed">Signin Failed Try Again...</string>
+    <string name="favorites">favorites</string>
+    <string name="uploads">Uploads</string>
+    <string name="about_me">About Me</string>
+    <string name="my_desc">Doing at the sweet spot between aesthetics and elegance to give life to your brand.My opinion belong to nobody but myself.</string>
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "667841043465",
+    "firebase_url": "https://happa-c3c4e.firebaseio.com",
+    "project_id": "happa-c3c4e",
+    "storage_bucket": "happa-c3c4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667841043465:android:8a5de84f7fe678b238acd8",
+        "android_client_info": {
+          "package_name": "com.mikonski.happa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667841043465-joi23lhcc6c6g357aj8lf3iarvfordg4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mikonski.happa",
+            "certificate_hash": "adb9cd3347251b49c49f0793e6be8de3cef26750"
+          }
+        },
+        {
+          "client_id": "667841043465-4v9aqatk50sjnokve4v5vbjh4daui24e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA68e4BTi2f0_NvRh__alfbXfokVnnO8Ww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667841043465-4v9aqatk50sjnokve4v5vbjh4daui24e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
