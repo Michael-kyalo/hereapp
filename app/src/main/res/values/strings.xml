@@ -14,5 +14,12 @@
     <string name="favorites">favorites</string>
     <string name="uploads">Uploads</string>
     <string name="about_me">About Me</string>
-    <string name="my_desc">Doing at the sweet spot between aesthetics and elegance to give life to your brand.My opinion belong to nobody but myself.</string>
+    <string name="my_desc">If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it; and this you have the power to revoke at any moment</string>
+    <string name="click_to_edit">Click to add image...</string>
+    <string name="user_text">Username</string>
+    <string name="save">save</string>
+    <string name="title">Event name</string>
+    <string name="description">Event description</string>
+    <string name="event_date">event date:</string>
+    <string name="hint_date">2/2/2020</string>
 </resources>

@@ -26,8 +26,9 @@ public class favoritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //hide fab to prevent confusion
         View fab = getActivity().findViewById(R.id.fab);
-        fab.setVisibility(View.VISIBLE);
+        fab.setVisibility(View.GONE);
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
 

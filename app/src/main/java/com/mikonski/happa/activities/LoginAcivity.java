@@ -108,6 +108,7 @@ public class LoginAcivity extends AppCompatActivity {
         textView_login.setText(getString(R.string.signin));
         lottieAnimationView.setVisibility(View.GONE);
         loading_anim.setVisibility(View.VISIBLE);
+        Failed_anim.setVisibility(View.GONE);
 
         Intent intent  = googleSignInClient.getSignInIntent();
         startActivityForResult(intent,RC_SIGN_IN);

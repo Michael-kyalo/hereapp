@@ -27,7 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_anchor="@+id/bar"
-        app:srcCompat="@drawable/ic_add_white"
-        tools:ignore="VectorDrawableCompat" />
+        app:srcCompat="@drawable/add"
+        tools:ignore="VectorDrawableCompat"
+        android:layout_marginBottom="10dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
