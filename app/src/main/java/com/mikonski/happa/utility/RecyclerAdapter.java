@@ -1,16 +1,17 @@
 package com.mikonski.happa.utility;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,9 +27,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eventholder> {
     private List<Event> eventList;
+    private Context context;
 
-    public RecyclerAdapter(List<Event> eventList) {
+    public RecyclerAdapter(List<Event> eventList, Context context) {
         this.eventList = eventList;
+        this.context = context;
     }
 
     @NonNull
@@ -40,10 +43,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eventh
 
     @Override
     public void onBindViewHolder(@NonNull final eventholder holder, int position) {
+        //animation
+        holder.cardView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition));
         Event event = eventList.get(position);
         holder.title.setText(event.getTitle());
         holder.date.setText(event.getDate());
         Picasso.get().load(event.getImage()).placeholder(R.drawable.place_marker_26px).into(holder.imageView);
+
 
         /*
         get username and pic from User
@@ -57,7 +63,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eventh
                 User user = documentSnapshot.toObject(User.class);
                 assert user != null;
                 holder.username.setText(user.getUsername());
-                Picasso.get().load(user.getImage()).placeholder(R.drawable.administrator_male_26px).into(holder.profile);
+                Picasso.get().load(user.getImage()).placeholder(R.drawable.administrator_male_26px).fit().centerCrop().into(holder.profile);
             }
         });
 
@@ -72,6 +78,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eventh
         CircleImageView profile;
         TextView username,date,title;
         ImageView imageView;
+        CardView cardView;
          public eventholder(@NonNull View itemView) {
              super(itemView);
 
@@ -80,6 +87,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eventh
              date = itemView.findViewById(R.id.date);
              title = itemView.findViewById(R.id.title_tv);
              imageView = itemView.findViewById(R.id.event_image);
+             cardView = itemView.findViewById(R.id.card);
+
 
          }
      }

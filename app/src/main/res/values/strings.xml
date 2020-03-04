@@ -8,18 +8,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_home">home</string>
-    <string name="DEFAULT_CLIENT_ID">667841043465-4v9aqatk50sjnokve4v5vbjh4daui24e.apps.googleusercontent.com</string>
+    <string name="DEFAULT_CLIENT_ID">667841043465–4v9aqatk50sjnokve4v5vbjh4daui24e.apps.googleusercontent.com</string>
     <string name="signin">Signing in.....</string>
-    <string name="signinfailed">Signin Failed Try Again...</string>
+    <string name="signinfailed">Signin Failed Try Again…</string>
     <string name="favorites">favorites</string>
     <string name="uploads">Uploads</string>
     <string name="about_me">About Me</string>
     <string name="my_desc">If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it; and this you have the power to revoke at any moment</string>
-    <string name="click_to_edit">Click to add image...</string>
+    <string name="click_to_edit">Click to add image…</string>
     <string name="user_text">Username</string>
     <string name="save">save</string>
     <string name="title">Event name</string>
     <string name="description">Event description</string>
     <string name="event_date">event date:</string>
     <string name="hint_date">2/2/2020</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

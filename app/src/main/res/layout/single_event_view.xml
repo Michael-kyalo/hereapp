@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         app:cardElevation="10dp"
         app:cardCornerRadius="5dp"
-
+        android:id="@+id/card"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="10dp">
 
@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="10dp">
 
                     <TextView
                         android:id="@+id/username"
@@ -47,16 +47,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/work_sans_medium"
                         android:text="@string/user_text"
-                        android:textStyle="bold"></TextView>
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/work_sans_medium"
-                        android:text="@string/event_date"
-                        android:textSize="12sp" />
-
+                        android:textStyle="bold"/>
                     <TextView
                         android:id="@+id/date"
                         android:layout_width="wrap_content"
@@ -90,7 +81,8 @@
                     android:id="@+id/event_image"
                     android:layout_width="300dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/place_marker_26px" />
+                    android:src="@drawable/place_marker_26px"
+                    tools:ignore="ContentDescription" />
 
 
             </LinearLayout>
@@ -106,21 +98,23 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:src="@drawable/heart_26px" />
+                    android:src="@drawable/heart_26px"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/add_event_image"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/add_image" />
+                    android:src="@drawable/add_image"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="30dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/chat_bubble_24px" />
+                    android:layout_marginEnd="30dp"
+                    android:src="@drawable/chat_bubble_24px"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
         </LinearLayout>

@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,14 +18,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.Source;
 import com.mikonski.happa.Models.Event;
 import com.mikonski.happa.R;
@@ -36,7 +33,6 @@ import com.mikonski.happa.utility.RecyclerAdapter;
 import org.imperiumlabs.geofirestore.GeoFirestore;
 import org.imperiumlabs.geofirestore.GeoQuery;
 import org.imperiumlabs.geofirestore.listeners.GeoQueryDataEventListener;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +50,7 @@ public class feedFragment extends Fragment {
     private ProgressBar progressBar;
     private List<Event> eventList = new ArrayList<>();
     private TextView loading;
+
 
 
 
@@ -92,11 +89,10 @@ public class feedFragment extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
-        recyclerAdapter = new RecyclerAdapter(eventList);
+        recyclerAdapter = new RecyclerAdapter(eventList, getContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerAdapter);
-
         setUpRecycleView(recyclerView);
 
         return view;
@@ -115,7 +111,7 @@ public class feedFragment extends Fragment {
             }
             GeoPoint point = new GeoPoint(latitude, longitude);
 
-            GeoQuery geoQuery= geoFirestore.queryAtLocation(point,5);
+            GeoQuery geoQuery= geoFirestore.queryAtLocation(point,10);
             geoQuery.addGeoQueryDataEventListener(new GeoQueryDataEventListener() {
                 @Override
                 public void onDocumentEntered(@NonNull DocumentSnapshot documentSnapshot, @NonNull GeoPoint geoPoint) {
@@ -162,14 +158,14 @@ public class feedFragment extends Fragment {
                 }
 
                 @Override
-                public void onDocumentMoved(@NonNull DocumentSnapshot documentSnapshot, GeoPoint geoPoint) {
+                public void onDocumentMoved(@NonNull DocumentSnapshot documentSnapshot, @NonNull GeoPoint geoPoint) {
 
 
 
                 }
 
                 @Override
-                public void onDocumentChanged(@NonNull DocumentSnapshot documentSnapshot, GeoPoint geoPoint) {
+                public void onDocumentChanged(@NonNull DocumentSnapshot documentSnapshot, @NonNull GeoPoint geoPoint) {
 
                 }
 
@@ -179,7 +175,7 @@ public class feedFragment extends Fragment {
                 }
 
                 @Override
-                public void onGeoQueryError(Exception e) {
+                public void onGeoQueryError(@NonNull Exception e) {
 
                 }
             });
