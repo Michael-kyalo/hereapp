@@ -1,6 +1,8 @@
 package com.mikonski.happa.fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -53,6 +55,7 @@ public class mapFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "mapFragment";
     private MapView Map;
     private GoogleMap moogleMap;
+    private Boolean empty = true;
 
 
 
@@ -119,6 +122,7 @@ public class mapFragment extends Fragment implements OnMapReadyCallback {
         geoQuery.addGeoQueryDataEventListener(new GeoQueryDataEventListener() {
             @Override
             public void onDocumentEntered(@NonNull DocumentSnapshot documentSnapshot, @NonNull GeoPoint geoPoint) {
+                empty = false;
                 Log.d(TAG, "onDocumentEntered: "+documentSnapshot.getId());
                 Log.d(TAG, "onDocumentEntered: "+ geoPoint.getLatitude());
                 LatLng position = new LatLng(geoPoint.getLatitude(),geoPoint.getLongitude());
@@ -145,6 +149,24 @@ public class mapFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public void onGeoQueryReady() {
+                if(empty){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage("No events around start posting")
+                            .setTitle("oops")
+                            .setIcon(drawable.sad)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+
+
+                                    dialog.dismiss();
+
+                                }
+                            });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
 
             }
 

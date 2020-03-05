@@ -1,12 +1,15 @@
 package com.mikonski.happa.fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.Source;
 import com.mikonski.happa.Models.Event;
+import com.mikonski.happa.Models.EventCLick;
 import com.mikonski.happa.R;
 import com.mikonski.happa.utility.LocationFinder;
 import com.mikonski.happa.utility.RecyclerAdapter;
@@ -48,8 +53,9 @@ public class feedFragment extends Fragment {
     private CollectionReference collectionReference, geofire;
     private RecyclerAdapter recyclerAdapter;
     private ProgressBar progressBar;
-    private List<Event> eventList = new ArrayList<>();
+    private List<EventCLick> eventList = new ArrayList<>();
     private TextView loading;
+    private Boolean empty = true;
 
 
 
@@ -83,12 +89,16 @@ public class feedFragment extends Fragment {
         collectionReference = firebaseFirestore.collection("events");
         geofire= firebaseFirestore.collection("events_locations");
 
+        FragmentManager fragmentManager = getFragmentManager();
+
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
+
         recyclerAdapter = new RecyclerAdapter(eventList, getContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -111,13 +121,16 @@ public class feedFragment extends Fragment {
             }
             GeoPoint point = new GeoPoint(latitude, longitude);
 
+
+
             GeoQuery geoQuery= geoFirestore.queryAtLocation(point,10);
             geoQuery.addGeoQueryDataEventListener(new GeoQueryDataEventListener() {
                 @Override
                 public void onDocumentEntered(@NonNull DocumentSnapshot documentSnapshot, @NonNull GeoPoint geoPoint) {
+                    empty = false;
                    //allows offline mode
                     Source source = Source.CACHE;
-                    String id = documentSnapshot.getId();
+                    final String id = documentSnapshot.getId();
                     Log.d(TAG, "onDocumentEntered: "+ id);
 
                     DocumentReference documentReference = collectionReference.document(id);
@@ -125,7 +138,18 @@ public class feedFragment extends Fragment {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             Event event = documentSnapshot.toObject(Event.class);
-                            eventList.add(event);
+                            EventCLick eventCLick = new EventCLick();
+                            assert event != null;
+                            eventCLick.setDate(event.getDate());
+                            eventCLick.setDescription(event.getDescription());
+                            eventCLick.setTime(event.getTime());
+                            eventCLick.setUid(event.getUid());
+                            eventCLick.setId(id);
+                            eventCLick.setImage(event.getImage());
+                            eventCLick.setTitle(event.getTitle());
+
+
+                            eventList.add(eventCLick);
                             progressBar.setVisibility(View.GONE);
                             loading.setVisibility(View.GONE);
 
@@ -171,6 +195,29 @@ public class feedFragment extends Fragment {
 
                 @Override
                 public void onGeoQueryReady() {
+                    if(empty){
+                        progressBar.setVisibility(View.GONE);
+                        loading.setVisibility(View.GONE);
+
+                       AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                       builder.setMessage("No events around start posting")
+                               .setTitle("oops")
+                               .setIcon(R.drawable.sad)
+                               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialog, int which) {
+
+
+
+                                       dialog.dismiss();
+
+                                   }
+                               });
+                       AlertDialog alertDialog = builder.create();
+                       alertDialog.show();
+
+
+                    }
 
                 }
 

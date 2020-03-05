@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
      * show popup for upload activity
      * i didnt implement View.Onclick bit me :D
      */
-    private void initpopup() {
+    public void initpopup() {
 
         popup = new Dialog(this);
         popup.setContentView(R.layout.popup_add_post);

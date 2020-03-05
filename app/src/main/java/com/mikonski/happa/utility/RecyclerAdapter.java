@@ -1,6 +1,7 @@
 package com.mikonski.happa.utility;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.mikonski.happa.Models.Event;
+import com.mikonski.happa.Models.EventCLick;
 import com.mikonski.happa.Models.User;
 import com.mikonski.happa.R;
+import com.mikonski.happa.activities.singlePostActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,13 +28,18 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eventholder> {
-    private List<Event> eventList;
+    private List<EventCLick> eventList;
     private Context context;
 
-    public RecyclerAdapter(List<Event> eventList, Context context) {
+
+
+    public RecyclerAdapter(List<EventCLick> eventList, Context context) {
         this.eventList = eventList;
         this.context = context;
+
+
     }
+
 
     @NonNull
     @Override
@@ -44,8 +51,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eventh
     @Override
     public void onBindViewHolder(@NonNull final eventholder holder, int position) {
         //animation
+        final EventCLick event = eventList.get(position);
         holder.cardView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition));
-        Event event = eventList.get(position);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, singlePostActivity.class);
+                intent.putExtra("id",event.getId());
+                context.startActivity(intent);
+
+
+            }
+        });
+
         holder.title.setText(event.getTitle());
         holder.date.setText(event.getDate());
         Picasso.get().load(event.getImage()).placeholder(R.drawable.place_marker_26px).into(holder.imageView);
@@ -88,6 +107,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eventh
              title = itemView.findViewById(R.id.title_tv);
              imageView = itemView.findViewById(R.id.event_image);
              cardView = itemView.findViewById(R.id.card);
+
+
 
 
          }

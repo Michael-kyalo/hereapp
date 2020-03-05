@@ -23,4 +23,7 @@
     <string name="event_date">event date:</string>
     <string name="hint_date">2/2/2020</string>
     <string name="title_activity_maps">Map</string>
+    <string name="oops">OOPs! no events around start posting..</string>
+    <string name="gallery">Gallery</string>
+    <string name="chat">Chat</string>
 </resources>
